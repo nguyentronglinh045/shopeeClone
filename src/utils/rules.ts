@@ -5,6 +5,7 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
   email: {
     required: { value: true, message: 'Email là bắt buộc' },
     pattern: {
+      // eslint-disable-next-line no-useless-escape
       value: /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/,
       message: 'Email không đúng định dạng'
     },
