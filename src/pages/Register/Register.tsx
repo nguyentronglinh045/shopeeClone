@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import Input from 'src/components/input'
 import { getRules } from 'src/utils/rules'
 
 interface FormData {
@@ -35,36 +36,33 @@ export default function Register() {
           <div className='lg:col-span-2 lg:col-start-4'>
             <form className='rounded bg-white p-10 shadow-sm' onSubmit={onSubmit} noValidate>
               <div className='text-2xl'>Đăng ký</div>
-              <div className='mt-8'>
-                <input
-                  autoComplete='on'
-                  type='email'
-                  placeholder='Email'
-                  className='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
-                  {...register('email', rules.email)}
-                />
-                <div className='mt-1 min-h-[1.25rem] text-sm text-red-600'>{errors.email?.message}</div>
-              </div>
-              <div className='mt-2'>
-                <input
-                  autoComplete='on'
-                  type='password'
-                  placeholder='Password'
-                  className='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
-                  {...register('password', rules.password)}
-                />
-                <div className='mt-1 min-h-[1.25rem] text-sm text-red-600'>{errors.password?.message}</div>
-              </div>
-              <div className='mt-2'>
-                <input
-                  autoComplete='on'
-                  type='password'
-                  placeholder='Confim Password'
-                  className='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
-                  {...register('confirm_password', rules.confirm_password)}
-                />
-                <div className='mt-1 min-h-[1.25rem] text-sm text-red-600'>{errors.confirm_password?.message}</div>
-              </div>
+              <Input
+                name='email'
+                placeholder='Email'
+                className='mt-8'
+                type={'email'}
+                errorMessage={errors.email?.message}
+                register={register}
+                rules={rules.email}
+              />
+              <Input
+                name='password'
+                placeholder='Password'
+                className='mt-2'
+                type={'password'}
+                errorMessage={errors.password?.message}
+                register={register}
+                rules={rules.password}
+              />
+              <Input
+                name='confirm_password'
+                placeholder='Confim Password'
+                className='mt-2'
+                type={'password'}
+                errorMessage={errors.confirm_password?.message}
+                register={register}
+                rules={rules.confirm_password}
+              />
               <div className='mt-2'>
                 <button className='w-full bg-orange py-4 px-2 text-center text-sm uppercase text-white hover:bg-red-600'>
                   Đăng ký

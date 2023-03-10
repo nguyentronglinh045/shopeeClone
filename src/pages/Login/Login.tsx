@@ -1,15 +1,32 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import Input from 'src/components/input'
+import { getRules } from 'src/utils/rules'
+
+interface FormData {
+  email: string
+  password: string
+
+}
 
 export default function Login() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
-  } = useForm()
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
-  })
+  } = useForm<FormData>()
+  const rules = getRules()
+
+  const onSubmit = handleSubmit(
+    (data) => {
+      console.log(data)
+    },
+    (data) => {
+      const password = getValues('password')
+      console.log(password)
+    }
+  )
 
   return (
     <div className='bg-orange'>
@@ -18,7 +35,7 @@ export default function Login() {
           <div className='lg:col-span-2 lg:col-start-4'>
             <form className='rounded bg-white p-10 shadow-sm' onSubmit={onSubmit}>
               <div className='text-2xl'>Đăng nhập</div>
-              <div className='mt-8'>
+              {/* <div className='mt-8'>
                 <input
                   autoComplete='on'
                   type='email'
@@ -37,7 +54,25 @@ export default function Login() {
                   className='w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm'
                 />
                 <div className='mt-1 min-h-[1rem] text-sm text-red-600'></div>
-              </div>
+              </div> */}
+              <Input
+                name='email'
+                placeholder='Email'
+                className='mt-8'
+                type={'email'}
+                errorMessage={errors.email?.message}
+                register={register}
+                rules={rules.email}
+              />
+              <Input
+                name='password'
+                placeholder='Password'
+                className='mt-3'
+                type={'password'}
+                errorMessage={errors.password?.message}
+                register={register}
+                rules={rules.password}
+              />
               <div className='mt-3'>
                 <button
                   type='submit'
